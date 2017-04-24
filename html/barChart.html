@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>BarChart</title>
+<link href="../styles/demo.css" rel="stylesheet">
+<script type="text/javascript" src="../js/d3.js"></script>
+</head>
+<body>
+    <div>
+        <p>Click the button to change the data</p>
+        <button>Change Data</button>
+    </div>
+    <script type="text/javascript">
+    	var dataset = [20, 30, 43, 12, 43, 23, 19, 45, 33, 22, 11, 44, 10, 40, 28, 37, 23, 8, 38, 16];
+
+    	var width = 1000;
+    	var height = 500;
+
+        var xScale = d3.scale.ordinal()
+                             .domain(d3.range(dataset.length))
+                             .rangeRoundBands([0, width], 0.05);
+
+        var yScale = d3.scale.linear()
+                             .domain([0, d3.max(dataset)])
+                             .range([0, height]);
+
+    	var svg = d3.select("body")
+    		.append("svg")
+    		.attr("width", width)
+    		.attr("height", height);
+
+    	var rect = svg.selectAll("rect")
+    		.data(dataset)
+    		.enter()
+    		.append("rect")
+    		.attr("x", function(d, i) {
+    			return xScale(i);
+    		})
+    		.attr("y", function(d) {
+    			return height - yScale(d);
+    		})
+    		.attr("width", xScale.rangeBand())
+    		.attr("height", function(d) {
+    			return yScale(d);
+    		})
+    		.attr("fill", function(d) {
+    			return "rgb(0, 0, " + d * 10 + ")";
+    		});
+
+    	var texts = svg.selectAll("text")
+    		.data(dataset)
+    		.enter()
+    		.append("text")
+    		.text(function(d) {
+    			return d;
+    		})
+    		.attr("x", function(d, i) {
+    			return xScale(i) + xScale.rangeBand() / 2 - 10;
+    		})
+    		.attr("y", function(d) {
+    			return height - yScale(d) + 20;
+    		})
+    		.attr("font-size", "15px")
+    		.attr("fill", "white");
+
+        d3.select("button")
+          .on("click", function() {
+            var dataCount = 20;
+            var maxValue = 40;
+            dataset.splice(0, dataCount);
+            for (let i = 0; i < dataCount; i++) {
+                var newData = Math.floor(Math.random() * maxValue);
+                dataset.push(newData);
+            }
+
+            svg.selectAll("rect")
+               .data(dataset)
+               .transition()
+               .delay(function(d, i) {
+                    return i / dataset.length * 1000;
+               })
+               .duration(1000)
+               .ease("cubic-in-out")
+               .attr("y", function(d) {
+                    return height - yScale(d);
+               })
+               .attr("height", function(d) {
+                    return yScale(d);
+               })
+               .attr("fill", function(d) {
+                    return "rgb(0, 0," + d * 10 + ")";
+               });
+
+            svg.selectAll("text")
+               .data(dataset)
+               .text(function(d) {
+                    return d;
+               })
+               .transition()
+               .delay(function(d, i) {
+                    return i / dataset.length * 1000;
+               })
+               .duration(1000)
+               .ease("cubic-in-out")
+               .attr("x", function(d, i) {
+                    return xScale(i) + xScale.rangeBand() / 2 - 10;
+               })
+               .attr("y", function(d) {
+                    return height - yScale(d) + 20;
+               });
+          });
+    </script>
+</body>
+</html>
