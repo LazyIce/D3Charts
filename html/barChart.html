@@ -7,6 +7,16 @@
 <link href="../styles/demo.css" rel="stylesheet">
 <script type="text/javascript" src="../js/d3.js"></script>
 <style type="text/css">
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: black;
+      shape-rendering: crispEdges;
+    }
+    .axis text {
+      font-size: 10px;
+    }
+
     #toolTip {
         position: absolute;
         width: 200px;
@@ -44,14 +54,22 @@
 
     	var width = 1000;
     	var height = 500;
+      var xAxisWidth = 900;
+      var yAxisWidth = 400;
+      var padding = {
+        top : 20,
+        right : 20,
+        bottom : 20,
+        left : 20
+      };
 
-        var xScale = d3.scale.ordinal()
-                             .domain(d3.range(dataset.length))
-                             .rangeRoundBands([0, width], 0.05);
+      var xScale = d3.scale.ordinal()
+                           .domain(d3.range(dataset.length))
+                           .rangeRoundBands([0, xAxisWidth], 0.05);
 
-        var yScale = d3.scale.linear()
-                             .domain([0, d3.max(dataset)])
-                             .range([0, height]);
+      var yScale = d3.scale.linear()
+                           .domain([0, d3.max(dataset)])
+                           .range([0, yAxisWidth]);
 
     	var svg = d3.select("body")
     		.append("svg")
@@ -63,10 +81,10 @@
     		.enter()
     		.append("rect")
     		.attr("x", function(d, i) {
-    			return xScale(i);
+    			return xScale(i) + padding.left;
     		})
     		.attr("y", function(d) {
-    			return height - yScale(d);
+    			return height - yScale(d) - padding.bottom;
     		})
     		.attr("width", xScale.rangeBand())
     		.attr("height", function(d) {
@@ -84,11 +102,13 @@
     			return d;
     		})
     		.attr("x", function(d, i) {
-    			return xScale(i) + xScale.rangeBand() / 2 - 10;
+    			return xScale(i) + xScale.rangeBand() / 2 + padding.left ;
     		})
     		.attr("y", function(d) {
-    			return height - yScale(d) + 20;
+    			return height - yScale(d) - padding.bottom;
     		})
+        .attr("dx", -10)
+        .attr("dy", 20)
     		.attr("font-size", "15px")
     		.attr("fill", "white");
 
@@ -111,7 +131,7 @@
                .duration(1000)
                .ease("cubic-in-out")
                .attr("y", function(d) {
-                    return height - yScale(d);
+                    return height - yScale(d) - padding.bottom;
                })
                .attr("height", function(d) {
                     return yScale(d);
@@ -132,11 +152,12 @@
                .duration(1000)
                .ease("cubic-in-out")
                .attr("x", function(d, i) {
-                    return xScale(i) + xScale.rangeBand() / 2 - 10;
+                    return xScale(i) + xScale.rangeBand() / 2 + padding.left;
                })
                .attr("y", function(d) {
-                    return height - yScale(d) + 20;
-               });
+                    return height - yScale(d) - padding.bottom;
+               })
+               .attr("class", "data");
         });
 
         d3.selectAll("rect")
@@ -174,9 +195,10 @@
                   .transition()
                   .duration(1000)
                   .attr("x", function(d, i) {
-                        return xScale(i);
+                        return xScale(i) + padding.left;
                   });
-                d3.selectAll("text")
+                
+                d3.selectAll(".data")
                   .sort(function(a, b) {
                         return d3.ascending(a, b);
                   })
@@ -186,14 +208,43 @@
                   .transition()
                   .duration(1000)
                   .attr("x", function(d, i) {
-                        return xScale(i) + xScale.rangeBand() / 2 - 10;
+                        return xScale(i) + xScale.rangeBand() / 2 + padding.left;
                   })
                   .attr("y", function(d) {
-                        return height - yScale(d) + 20;
-               });
-          });
+                        return height - yScale(d) - padding.bottom;
+                  });
+            });
+        
+        var datasetCount = d3.range(dataset.length);
+        for (let i = 0; i < dataset.length; i++)
+          datasetCount[i] += 1;
+        
+        var xAxisScale = d3.scale.ordinal()
+                           .domain(datasetCount)
+                           .rangeRoundBands([0, xAxisWidth], 0.05);
 
+        var yAxisScale = d3.scale.linear()
+                           .domain([0, d3.max(dataset)])
+                           .range([yAxisWidth, 0]);
 
+        var xAxis = d3.svg.axis()
+                          .scale(xAxisScale)
+                          .orient("bottom")
+                 
+        svg.append("g")
+           .attr("class", "axis")
+           .attr("transform", "translate(" + padding.left + "," + (height - padding.top) + ")")
+           .call(xAxis);
+
+        var yAxis = d3.svg.axis()
+                          .scale(yAxisScale)
+                          .orient("left")
+                          .ticks(5);
+
+        svg.append("g")
+           .attr("class", "axis")
+           .attr("transform", "translate(" + padding.left + "," + (height - yAxisWidth - padding.bottom) + ")")
+           .call(yAxis);
     </script>
 </body>
 </html>
