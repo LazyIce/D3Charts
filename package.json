@@ -1,0 +1,45 @@
+{
+  "name": "@types/smarttrafficchart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " gulp start_new",
+    "new": "gulp start_new ",
+    "clean": "gulp clean",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sap-SmartTraffic/Chart.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sap-SmartTraffic/Chart/issues"
+  },
+  "homepage": "https://github.com/Sap-SmartTraffic/Chart#readme",
+  "devDependencies": {
+    "@types/d3": "^4.7.0",
+    "@types/jquery": "^2.0.41",
+    "@types/lodash": "^4.14.71",
+    "@types/underscore": "^1.8.0",
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^3.3.0",
+    "gulp-requirejs": "^1.0.0-rc2",
+    "gulp-requirejs-optimize": "^1.2.0",
+    "gulp-typescript": "^3.1.7",
+    "merge2": "^1.0.3",
+    "typescript": "2.3.0"
+  },
+  "dependencies": {
+    "d3": "^4.8.0",
+    "lodash": "^4.17.4",
+    "requirejs": "^2.3.3"
+  }
+}

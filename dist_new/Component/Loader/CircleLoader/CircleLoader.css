@@ -1,0 +1,46 @@
+.circleLoaderContainer {
+  background: #1c4587;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  transition: transform 1s linear;
+}
+.circleLoaderContainer svg {
+  transform: translate3d(-50%, -50%, 0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.circleLoaderContainer svg g {
+  fill: none;
+  fill-rule: evenodd;
+}
+.circleLoaderContainer svg g circle {
+  stroke-width: 5;
+  stroke: black;
+  stroke-opacity: 0.2;
+}
+.circleLoaderContainer svg g path {
+  stroke-width: 5;
+}
+.circleLoaderContainer svg g .path1 {
+  stroke: aqua;
+}
+.circleLoaderContainer svg g .path2 {
+  stroke: greenyellow;
+}
+.circleLoaderContainer svg g text {
+  font-family: "Times New Roman";
+  text-anchor: middle;
+  fill: aqua;
+  stroke-width: 0;
+}
+.circleLoaderContainer svg g .loaderRatio {
+  alignment-baseline: middle;
+  font-size: 40px;
+}
+.circleLoaderContainer svg g .loaderText {
+  font-size: 20px;
+}

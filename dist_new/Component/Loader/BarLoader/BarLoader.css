@@ -1,0 +1,33 @@
+.barLoaderContainer {
+  background: #1c4587;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  transition: transform 1s linear;
+}
+.barLoaderContainer svg {
+  transform: translate3d(-50%, -50%, 0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.barLoaderContainer svg line {
+  stroke-width: 30;
+  stroke-dasharray: 5,5;
+}
+.barLoaderContainer svg #lineBase {
+  stroke: #a6a6a6;
+}
+.barLoaderContainer svg #colorful {
+  transition: all 0.5s ease;
+  stroke: url(#color-gradient);
+}
+.barLoaderContainer svg text {
+  font-size: 20px;
+  font-family: "Times New Roman";
+  text-anchor: middle;
+  fill: aqua;
+  stroke-width: 0;
+}

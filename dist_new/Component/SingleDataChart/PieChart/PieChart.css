@@ -1,0 +1,6 @@
+.pieChart .doughnut {
+  fill-opacity: 0.5;
+}
+.pieChart .doughnut:hover {
+  fill-opacity: 1;
+}

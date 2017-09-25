@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Chart Demo-Component</title>
+</head>
+<script src="/node_modules/requirejs/require.js"></script>
+<script src="/dist_new/requireConfig.js"></script>
+<body>
+    <div class="header"><h1>Chart Demos</h1></div>
+    <div class="content">
+        <div class="chart-group">
+            <h2>Loader</h2>
+            <div class="chart-row">
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/Loader/BarLoader/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">BarProgressLoader</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/Loader/CircleLoader/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">CircleProgressLoader</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/Loader/ShanghaiLoader/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">ShanghaiProgressLoader</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/SingleDataChart/TimeAdjust/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">TimeAdjust Bar</h3>
+                </div>
+            </div>
+        </div>
+        <div class="chart-group">
+            <h2>SingleDataChart</h2>
+            <div class="chart-row">
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/SingleDataChart/DashChart/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">DashChart</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/SingleDataChart/PieChart/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">PieChart</h3>
+                </div>
+            </div>
+        </div>
+        <div class="chart-group">
+            <h2>MultipleDataChart</h2>
+            <div class="chart-row">
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/MultiDataChart/BarChart/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">BarChart</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/MultiDataChart/LineChart/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">LineChart</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/MultiDataChart/RangeChart/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">RangeChart</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/MultiDataChart/BoxplotChart/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">BoxplotChart</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/MultiDataChart/HeatChart/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">HeatChart</h3>
+                </div>
+                <div class="chart-item">
+                    <iframe src="/dist_new/Component/MultiDataChart/BarLineChart/index.html" class="chart-frame"></iframe>
+                    <h3 class="chart-title">BarLineChart</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        background-color: #eeeeee;
+        margin: 0px 0px;
+    }
+
+    .header {
+        background-color: #4169E1;
+        height: 80px;
+    }
+
+    .header h1{
+        color: #ffffff;
+        margin: 0px 0px;
+        line-height: 80px;
+        margin-left: 3%;
+    }
+
+    .content {
+        margin: 0px 3%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .chart-group {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .chart-group h2 {
+        color: #313131;
+        padding-bottom: 10px;
+        border-bottom: 2px solid#D4D4DE;
+    }
+
+    .chart-item {
+        display: inline-block;
+        width: 650px;
+        height: 640px;
+        box-shadow: 5px 5px 5px #d6d6d6;
+        margin-bottom: 30px;
+    }
+
+    .chart-frame {
+        background-color: #ffffff;
+        border:0px;
+        width:100%;
+        height: 590px;
+    }
+
+    .chart-title {
+        color:#4682B4;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        margin: 0px 0px;
+    }
+</style>
+<script>
+    let chartItems = document.getElementsByClassName("chart-item")
+    for(var chart of chartItems){
+        chart.onclick = function(){
+            window.open(this.children[0].attributes['src'].value)
+        }
+        
+    }
+</script>
+<!-- <script>
+    function iframeGen(d3,chart){
+        var fragment=document.createDocumentFragment()
+        let s=d3.select(fragment).append("xhtml:div").classed("chart-group",true)
+        s.append("xhtml:iframe").attr("src",chart.url).classed("chart-frame",true)
+        s.append("xhtml:h3").classed("chart-title",true).text(chart.name).on("click",function(){
+            window.open(chart.url)
+        })
+        return fragment
+    }
+    requirejs(["d3"],function(d3){
+       let body=document.getElementById("content")
+       var urls=[]
+       urls.push({
+           name:"circleProgressLoader",
+           url:"/dist_new/Component/Loader/CircleLoader/index.html"
+       })
+       urls.push({
+           name:"barProgressLoader",
+           url:"/dist_new/Component/Loader/BarLoader/index.html"
+       })
+       urls.push({
+           name:"LineChart",
+           url:"/dist_new/Component/MultiDataChart/LineChart/index.html"
+       })
+       urls.push({
+           name:"BarChart",
+           url:"/dist_new/Component/MultiDataChart/BarChart/index.html"
+       })
+       urls.push({
+           name:"RangeChart",
+           url:"/dist_new/Component/MultiDataChart/RangeChart/index.html"
+       })
+       urls.push({
+           name:"BarLineChart",
+           url:"/dist_new/Component/MultiDataChart/BarLineChart/index.html"
+       })
+       urls.push({
+           name:"DashChart",
+           url:"/dist_new/Component/SingleDataChart/DashChart/index.html"
+       })
+       urls.push({
+           name:"PieChart",
+           url:"/dist_new/Component/SingleDataChart/PieChart/index.html"
+       })
+       urls.forEach(function(chart){
+            body.appendChild(iframeGen(d3,chart))
+       })
+    })
+</script> -->
+</html>

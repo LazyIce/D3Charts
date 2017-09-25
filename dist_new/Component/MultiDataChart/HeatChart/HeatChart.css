@@ -1,0 +1,25 @@
+.heatChart .rectGroup .heatRectText {
+  text-anchor: middle;
+  alignment-baseline: middle;
+  fill: #000000;
+}
+.heatChart .textGroup .heatYText {
+  font-weight: bold;
+  alignment-baseline: hanging;
+}
+.heatChart .textGroup .heatXText {
+  font-weight: bold;
+  text-anchor: middle;
+  alignment-baseline: middle;
+}
+.heatChart .heatBar .heatBarTriangle {
+  fill: #999999;
+}
+.heatChart .heatBar .heatBarLine {
+  stroke: #999999;
+  stroke-width: 1px;
+}
+.heatChart .heatBar .heatBarText {
+  alignment-baseline: middle;
+  font-size: 0.8rem;
+}

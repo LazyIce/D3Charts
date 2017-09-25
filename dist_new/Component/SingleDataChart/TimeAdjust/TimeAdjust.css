@@ -1,0 +1,27 @@
+.timeAdjuster .panel {
+  fill: transparent;
+}
+.timeAdjuster .focusText {
+  font-size: 15px;
+  alignment-baseline: middle;
+}
+.timeAdjuster .rightSide {
+  text-anchor: start;
+}
+.timeAdjuster .leftSide {
+  text-anchor: end;
+}
+.timeAdjuster .focusLine {
+  stroke: yellowgreen;
+  stroke-width: 2;
+}
+.timeAdjuster .focusRect {
+  fill: #e6e6e6;
+}
+.timeAdjuster .focusRectLine {
+  stroke: #555;
+  stroke-width: 1;
+}
+.timeAdjuster .axisBackground {
+  fill: red;
+}
